@@ -6,7 +6,7 @@ class ProductModal {
   String? title;
   int? price;
   String? description;
-  List<String>? images;
+  List<dynamic>? images;
   CategoryModel? category;
 
   //constructor
