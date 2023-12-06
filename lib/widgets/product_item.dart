@@ -14,7 +14,7 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color.fromARGB(246, 245, 242, 242),
+      color: Colors.white70,
       child: Row(
         children: [
           Container(
@@ -30,8 +30,14 @@ class ProductTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title),
-                Text(categoryName),
+                Text(
+                  title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Text(
+                  categoryName,
+                  style: TextStyle(color: Colors.black54),
+                ),
               ],
             ),
           ),

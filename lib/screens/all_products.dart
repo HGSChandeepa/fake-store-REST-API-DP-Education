@@ -36,9 +36,9 @@ class _AllProductsState extends State<AllProducts> {
       appBar: AppBar(
         title: const Text(
           "Fake Store",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
         ),
-        backgroundColor: const Color.fromARGB(255, 74, 5, 153),
+        backgroundColor: Color.fromARGB(255, 241, 205, 1),
       ),
       body: SafeArea(
         child: Column(
@@ -52,19 +52,23 @@ class _AllProductsState extends State<AllProducts> {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return ProductDetails(
-                            title: allProducts[index].title ?? "",
-                            description: '',
-                            price: 0,
-                            category: '',
-                            images: [],
+                            title: allProducts[index].title!,
+                            description: allProducts[index].description!,
+                            price: allProducts[index].price!,
+                            category: allProducts[index].category?.name ?? " ",
+                            images: allProducts[index].images!,
                           );
                         },
                       ));
                     },
-                    child: ProductTile(
-                      title: allProducts[index].title ?? "",
-                      categoryName: allProducts[index].category?.name ?? "",
-                      imageURL: allProducts[index].images?[0],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 3),
+                      child: ProductTile(
+                        title: allProducts[index].title ?? "",
+                        categoryName: allProducts[index].category?.name ?? "",
+                        imageURL: allProducts[index].images?[0],
+                      ),
                     ),
                   );
                 },
