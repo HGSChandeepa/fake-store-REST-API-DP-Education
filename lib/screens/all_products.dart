@@ -1,5 +1,7 @@
 import 'package:fake_store_app/models/product.dart';
+import 'package:fake_store_app/screens/produt_details.dart';
 import 'package:fake_store_app/services/products_service.dart';
+import 'package:fake_store_app/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 
 class AllProducts extends StatefulWidget {
@@ -16,6 +18,8 @@ class _AllProductsState extends State<AllProducts> {
   @override
   void initState() {
     super.initState();
+    allProducts = [];
+    fetchAllProducts();
   }
 
   // Fetch all products
@@ -29,23 +33,39 @@ class _AllProductsState extends State<AllProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Fake Store",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color.fromARGB(255, 74, 5, 153),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            TextButton(
-              child: const Text("Click"),
-              onPressed: () async {
-                await fetchAllProducts(); // Await the fetchAllProducts call
-              },
-            ),
             Expanded(
               child: ListView.builder(
-                itemCount: allProducts.length,
+                itemCount: allProducts.length > 10 ? 10 : 0,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(allProducts[index].images?[0] ?? ""),
-                    leading: Image.network(
-                        "https://spicyip.com/wp-content/uploads/2021/07/word-design.jpg"),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return ProductDetails(
+                            title: allProducts[index].title ?? "",
+                            description: '',
+                            price: 0,
+                            category: '',
+                            images: [],
+                          );
+                        },
+                      ));
+                    },
+                    child: ProductTile(
+                      title: allProducts[index].title ?? "",
+                      categoryName: allProducts[index].category?.name ?? "",
+                      imageURL: allProducts[index].images?[0],
+                    ),
                   );
                 },
               ),

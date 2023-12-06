@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:fake_store_app/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
