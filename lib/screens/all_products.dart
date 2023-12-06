@@ -40,43 +40,50 @@ class _AllProductsState extends State<AllProducts> {
         ),
         backgroundColor: Color.fromARGB(255, 241, 205, 1),
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: allProducts.length > 10 ? 10 : 0,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return ProductDetails(
-                            title: allProducts[index].title!,
-                            description: allProducts[index].description!,
-                            price: allProducts[index].price!,
-                            category: allProducts[index].category?.name ?? " ",
-                            images: allProducts[index].images!,
-                          );
-                        },
-                      ));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 3),
-                      child: ProductTile(
-                        title: allProducts[index].title ?? "",
-                        categoryName: allProducts[index].category?.name ?? "",
-                        imageURL: allProducts[index].images?[0],
-                      ),
+      body: allProducts.isEmpty
+          ? const Center(
+              child: CircularProgressIndicator(
+              color: Color.fromARGB(255, 255, 217, 0),
+            ))
+          : SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: allProducts.length > 10 ? 10 : 0,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetails(
+                                  title: allProducts[index].title!,
+                                  description: allProducts[index].description!,
+                                  price: allProducts[index].price!,
+                                  category:
+                                      allProducts[index].category?.name ?? " ",
+                                  images: allProducts[index].images!,
+                                );
+                              },
+                            ));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
+                            child: ProductTile(
+                              title: allProducts[index].title ?? "",
+                              categoryName:
+                                  allProducts[index].category?.name ?? "",
+                              imageURL: allProducts[index].images?[0],
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
